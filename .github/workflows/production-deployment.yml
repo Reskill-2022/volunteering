@@ -7,7 +7,7 @@ on:
 env:
   SERVICE_NAME: volunteering-service
   DEPLOYMENT_ENV: production
-  CONTAINER_NAME: volunteering-service-staging
+  CONTAINER_NAME: volunteering-service-production
   ECR_REPOSITORY: volunteering-service    
   ECS_SERVICE: volunteering-service                 
   ECS_CLUSTER: production                 
@@ -21,7 +21,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: staging
+    environment: production
 
     steps:
     - name: Checkout
@@ -46,7 +46,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         GITHUB_USER: ${{ secrets.TOKEN_USER }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --no-cache -f .github/docker/staging/Dockerfile .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --no-cache -f .github/docker/production/Dockerfile .
         docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$LATEST_TAG
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$LATEST_TAG
