@@ -1,0 +1,31 @@
+name: Go
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19
+        
+    - name: Make mocks
+      run: |
+
+    - name: Test
+      run: |
+        export GOPRIVATE=github.com/Reskill-2022
+        git config --global url."https://$GITHUB_USER:$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
+        go get ./...
+        go install github.com/vektra/mockery/v2@v2.14.0
+        mockery --all --output=testutil/mocks --case=underscore --keeptree
+        go test -v -race ./...
+      env:
+        GITHUB_USER: ${{ secrets.TOKEN_USER }}
+        GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
