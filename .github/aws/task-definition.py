@@ -100,6 +100,10 @@ def create_task_definition():
                         "valueFrom": credentials_arn_base.format(secret_arn_base, env.ServiceName, credentials_arn_env, "SERVICE_ACCOUNT_1"),
                         "name": "SERVICE_ACCOUNT_1"
                     },
+                    {
+                        "valueFrom": credentials_arn_base.format(secret_arn_base, env.ServiceName, credentials_arn_env, "SERVICE_ACCOUNT_2"),
+                        "name": "SERVICE_ACCOUNT_2"
+                    },
                 ],
             }        
         ]
