@@ -6,9 +6,9 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/rs/zerolog"
+
 	"github.com/Reskill-2022/volunteering/config"
 	"github.com/Reskill-2022/volunteering/controllers"
-	"github.com/Reskill-2022/volunteering/email"
 	"github.com/Reskill-2022/volunteering/linkedin"
 	"github.com/Reskill-2022/volunteering/repository"
 	"github.com/Reskill-2022/volunteering/server"
