@@ -131,7 +131,7 @@ func (l *lkd) getProfile(authCode, redirectURI string) (*GetProfileOutput, error
 
 	if resp.StatusCode != http.StatusOK {
 		l.logger.Err(fmt.Errorf("expected status code 200, got %d", resp.StatusCode)).Msg("Request failed")
-		_, err := io.Copy(os.Stderr, resp.Body)
+		_, err := io.Copy(os.Stdout, resp.Body)
 		if err != nil {
 			l.logger.Err(err).Msg("Failed to write response error")
 		}
