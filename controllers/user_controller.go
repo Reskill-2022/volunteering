@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -43,6 +44,8 @@ func (u *UserController) CreateUser(userCreator repository.UserCreator, service 
 		if redirectURI == "" {
 			return u.HandleError(c, errors.New("Redirect URI is required", 400), http.StatusBadRequest)
 		}
+
+		fmt.Printf("Auth Code: %s, Redirect URI: %s", authCode, redirectURI)
 
 		profile, err := service.GetProfile(authCode, redirectURI)
 		if err != nil {
