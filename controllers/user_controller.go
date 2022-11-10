@@ -99,35 +99,52 @@ func (u *UserController) UpdateUser(userGetter repository.UserGetter, userUpdate
 			return u.HandleError(c, err, errors.CodeFrom(err))
 		}
 		if update.Enrolled {
-			return u.HandleError(c, errors.New("User Already Enrolled", 400), http.StatusBadRequest)
+			return u.HandleError(c, errors.New("Responses already recorded. You have applied!", 400), http.StatusBadRequest)
 		}
 
 		{
 			if requestBody.State == "" {
-				return u.HandleError(c, errors.New("Missing Fields! LinkedIn URL is required", 400), http.StatusBadRequest)
+				return u.HandleError(c, errors.New("Missing Field! State is required", 400), http.StatusBadRequest)
 			}
 			update.State = requestBody.State
 
-			if requestBody.Organization != "" {
-				update.Organization = requestBody.Organization
+			if requestBody.Organization == "" {
+				return u.HandleError(c, errors.New("Missing Field! Organization is required", 400), http.StatusBadRequest)
 			}
+			update.Organization = requestBody.Organization
 
-			if requestBody.YearsOfExperience != "" {
-				update.YearsOfExperience = requestBody.YearsOfExperience
+			if requestBody.YearsOfExperience == "" {
+				return u.HandleError(c, errors.New("Missing Field! Years of Experience is required", 400), http.StatusBadRequest)
 			}
+			update.YearsOfExperience = requestBody.YearsOfExperience
 
-			if len(requestBody.VolunteerAreas) == 0 {
-				return u.HandleError(c, errors.New("Missing Fields! Volunteer Areas is required", 400), http.StatusBadRequest)
+			if requestBody.VolunteerAreas == nil {
+				return u.HandleError(c, errors.New("Missing Field! Volunteer Areas is required", 400), http.StatusBadRequest)
 			}
 			update.VolunteerAreas = strings.Join(requestBody.VolunteerAreas, ",")
 
-			if requestBody.IsUnderrepresented != nil {
-				update.IsUnderrepresented = *requestBody.IsUnderrepresented
+			if requestBody.VolunteerMeans == nil {
+				return u.HandleError(c, errors.New("Missing Field! Volunteer Means is required", 400), http.StatusBadRequest)
+			}
+			update.VolunteerMeans = strings.Join(requestBody.VolunteerMeans, ",")
+
+			if requestBody.WillJoinDirectory != nil {
+				update.WillJoinDirectory = *requestBody.WillJoinDirectory
 			}
 
-			if requestBody.IsConvicted != nil {
-				update.IsConvicted = *requestBody.IsConvicted
+			if requestBody.SelfSummary != "" {
+				update.SelfSummary = requestBody.SelfSummary
 			}
+
+			if requestBody.Representation == "" {
+				return u.HandleError(c, errors.New("Missing Field! Representation is required", 400), http.StatusBadRequest)
+			}
+			update.Representation = requestBody.Representation
+
+			if requestBody.ProvidedName == "" {
+				return u.HandleError(c, errors.New("Missing Field! Name is required", 400), http.StatusBadRequest)
+			}
+			update.ProvidedName = requestBody.ProvidedName
 		}
 
 		update.Enrolled = true

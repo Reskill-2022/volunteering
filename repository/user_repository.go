@@ -73,12 +73,23 @@ func (u *UserRepository) UpdateUser(ctx context.Context, user model.User) (*mode
 	u.logger.Debug().Msgf("Firestore: updating user with email: %s", user.Email)
 
 	updates := []firestore.Update{
+		{Path: "email", Value: user.Email},
+		{Path: "name", Value: user.Name},
+		{Path: "phone", Value: user.Phone},
+		{Path: "first_name", Value: user.FirstName},
+		{Path: "last_name", Value: user.LastName},
+		{Path: "photo", Value: user.Photo},
 		{Path: "state", Value: user.State},
 		{Path: "organization", Value: user.Organization},
 		{Path: "years_of_experience", Value: user.YearsOfExperience},
 		{Path: "volunteer_areas", Value: user.VolunteerAreas},
-		{Path: "is_underrepresented", Value: user.IsUnderrepresented},
-		{Path: "is_convicted", Value: user.IsConvicted},
+		{Path: "volunteer_means", Value: user.VolunteerMeans},
+		{Path: "will_join_directory", Value: user.WillJoinDirectory},
+		{Path: "self_summary", Value: user.SelfSummary},
+		{Path: "representation", Value: user.Representation},
+		{Path: "provided_name", Value: user.ProvidedName},
+		{Path: "enrolled", Value: user.Enrolled},
+		{Path: "created_at", Value: user.CreatedAt},
 	}
 
 	if _, err := u.client1.Collection(collectionName).Doc(user.Email).Update(ctx, updates); err != nil {

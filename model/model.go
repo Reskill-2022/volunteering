@@ -12,12 +12,15 @@ type User struct {
 	Photo     string `json:"photo" firestore:"photo"`
 
 	// Extras
-	State              string `json:"state" firestore:"state"`
-	Organization       string `json:"organization" firestore:"organization"`
-	YearsOfExperience  string `json:"years_of_experience" firestore:"years_of_experience"`
-	VolunteerAreas     string `json:"volunteer_areas" firestore:"volunteer_areas"`
-	IsUnderrepresented bool   `json:"is_underrepresented" firestore:"is_underrepresented"`
-	IsConvicted        bool   `json:"is_convicted" firestore:"is_convicted"`
+	State             string `json:"state" firestore:"state"`
+	Organization      string `json:"organization" firestore:"organization"`
+	YearsOfExperience string `json:"years_of_experience" firestore:"years_of_experience"`
+	VolunteerAreas    string `json:"volunteer_areas" firestore:"volunteer_areas"`
+	VolunteerMeans    string `json:"volunteer_means" firestore:"volunteer_means"`
+	WillJoinDirectory bool   `json:"will_join_directory" firestore:"will_join_directory"`
+	SelfSummary       string `json:"self_summary" firestore:"self_summary"`
+	Representation    string `json:"representation" firestore:"representation"`
+	ProvidedName      string `json:"provided_name" firestore:"provided_name"`
 
 	Enrolled  bool      `json:"enrolled" firestore:"enrolled"`
 	CreatedAt time.Time `json:"created_at" firestore:"created_at"`
