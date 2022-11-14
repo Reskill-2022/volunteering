@@ -12,8 +12,7 @@ type (
 		YearsOfExperience string   `json:"years_of_experience"`
 		VolunteerAreas    []string `json:"volunteer_areas,omitempty"`
 		VolunteerMeans    []string `json:"volunteer_means,omitempty"`
-		WillJoinDirectory *bool    `json:"will_join_directory,omitempty"`
-		SelfSummary       string   `json:"self_summary"`
+		Convicted         *bool    `json:"convicted"`
 		Representation    string   `json:"representation"`
 		ProvidedName      string   `json:"provided_name"`
 	}

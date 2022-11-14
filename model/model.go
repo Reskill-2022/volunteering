@@ -17,8 +17,7 @@ type User struct {
 	YearsOfExperience string `json:"years_of_experience" firestore:"years_of_experience"`
 	VolunteerAreas    string `json:"volunteer_areas" firestore:"volunteer_areas"`
 	VolunteerMeans    string `json:"volunteer_means" firestore:"volunteer_means"`
-	WillJoinDirectory bool   `json:"will_join_directory" firestore:"will_join_directory"`
-	SelfSummary       string `json:"self_summary" firestore:"self_summary"`
+	Convicted         bool   `json:"convicted" firestore:"convicted"`
 	Representation    string `json:"representation" firestore:"representation"`
 	ProvidedName      string `json:"provided_name" firestore:"provided_name"`
 

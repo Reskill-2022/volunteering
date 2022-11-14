@@ -128,13 +128,18 @@ func (u *UserController) UpdateUser(userGetter repository.UserGetter, userUpdate
 			}
 			update.VolunteerMeans = strings.Join(requestBody.VolunteerMeans, ",")
 
-			if requestBody.WillJoinDirectory != nil {
-				update.WillJoinDirectory = *requestBody.WillJoinDirectory
+			if requestBody.Convicted == nil {
+				return u.HandleError(c, errors.New("Missing Field! Convicted is required", 400), http.StatusBadRequest)
 			}
+			update.Convicted = *requestBody.Convicted
 
-			if requestBody.SelfSummary != "" {
-				update.SelfSummary = requestBody.SelfSummary
-			}
+			// if requestBody.WillJoinDirectory != nil {
+			// 	update.WillJoinDirectory = *requestBody.WillJoinDirectory
+			// }
+
+			// if requestBody.SelfSummary != "" {
+			// 	update.SelfSummary = requestBody.SelfSummary
+			// }
 
 			if requestBody.Representation == "" {
 				return u.HandleError(c, errors.New("Missing Field! Representation is required", 400), http.StatusBadRequest)
